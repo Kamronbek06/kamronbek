@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stol Tennis O'yini</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2ff00ba; /* Yashil fon rangi */
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        #gameArea {
+            position: relative;
+            width: 800px;
+            height: 400px;
+            border: 2px solid #333;
+            background-color: #00ff22; /* Sariq stol rangi */
+        }
+        .player, .opponent {
+            position: absolute;
+            width: 10px;
+            height: 100px;
+            background-color: rgb(255, 0, 0);
+        }
+        .ball {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 00%;
+        }
+        #scoreboard {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div id="gameArea">
+    <div id="player" class="player" style="left: 0; top: 150px;"></div>
+    <div id="opponent" class="opponent" style="right: 0; top: 150px;"></div>
+    <div id="ball" class="ball" style="left: 392px; top: 192.5px;"></div>
+</div>
+<div id="scoreboard">
+    <h2>Ballar: <span id="score">0</span></h2>
+    <h2 id="message"></h2>
+</div>
+
+<script>
+    const player = document.getElementById('player');
+    const opponent = document.getElementById('opponent');
+    const ball = document.getElementById('ball');
+    const scoreDisplay = document.getElementById('score');
+    const messageDisplay = document.getElementById('message');
+
+    let score = 0;
+    let playerY = 150;
+    let ballSpeedX = 5;
+    let ballSpeedY = 2;
+    let ballDirectionX = 1;
+    let ballDirectionY = 1;
+
+    document.addEventListener('mousemove', (event) => {
+        const gameArea = document.getElementById('gameArea');
+        const gameAreaRect = gameArea.getBoundingClientRect();
+        playerY = event.clientY - gameAreaRect.top - player.offsetHeight / 2;
+
+        if (playerY < 0) playerY = 0;
+        if (playerY > gameArea.offsetHeight - player.offsetHeight) {
+            playerY = gameArea.offsetHeight - player.offsetHeight;
+        }
+
+        player.style.top = playerY + 'px';
+    });
+
+    // O'yinchini urish joyini aniqlash
+    function hitBall() {
+        // To'pni urish joyini aniqlash
+        const ballY = parseInt(ball.style.top);
+        const playerMidY = playerY + (player.offsetHeight / 2);
+        const diffY = ballY - playerMidY;
+
+        if (Math.abs(diffY) <= 45) { // Urish uchun yondashuv
+            ballDirectionX = 3; // O'ngga qaytish
+            ballDirectionY = diffY > 1 ? 1 : -1; // Yuqoriga yoki pastga
+            score++;
+            scoreDisplay.innerText = score;
+            moveOpponent();
+        }
+    }
+
+    function moveOpponent() {
+        const ballY = parseInt(ball.style.top);
+        const opponentY = ballY - opponent.offsetHeight / 2 + 7.5;
+
+        // Raqibning harakatini tezlatuvchi kod
+        if (opponentY < 2) opponent.style.top = '0px';
+        else if (opponentY > gameArea.offsetHeight - opponent.offsetHeight) {
+            opponent.style.top = gameArea.offsetHeight - opponent.offsetHeight + 'px';
+        } else {
+            opponent.style.top = opponentY + 'px';
+        }
+    }
+
+    function moveBall() {
+        const ballX = parseInt(ball.style.left);
+        const ballY = parseInt(ball.style.top);
+
+        ball.style.left = (ballX + ballSpeedX * ballDirectionX) + 'px';
+        ball.style.top = (ballY + ballSpeedY * ballDirectionY) + 'px';
+
+        // Tepaga yoki pastga tegib qolganda yo'nalishni o'zgartirish
+       // if (ballY <= 0 || ballY >= (gameArea.offsetHeight - ball.offsetHeight)) {
+           // ballDirectionY = -1;
+       // }
+       // console.log(ballDirectionY)
+        if (ballY <=0) {
+            ballDirectionY = 1;
+            console.log("to'p yuqori chegaraga tegdi");
+        }
+        else if (ballY >=(gameArea.offsetHeight)) {
+            ballDirectionY = -1;
+            console.log("to'p pastki chegaraga tegdi")
+        }
+
+        // if (ballY <= 1 && ballDirectionY == -1) {
+        //     ballDirectionY =    -1;
+        // }
+       
+        // O'yinchi raketkasi bilan urish
+        if (ballX <= player.offsetWidth) {
+            hitBall();
+        }// Raqib raketkasi bilan urish
+        if (ballX + ball.offsetWidth >= gameArea.offsetWidth - opponent.offsetWidth &&
+            ballY + ball.offsetHeight >= parseInt(opponent.style.top) &&
+            ballY <= parseInt(opponent.style.top) + opponent.offsetHeight) {
+            ballDirectionX = -1;
+            ballDirectionY = Math.random() < 2 ? 2 : 2; // Raqibdan qaytib kelganda yuqoriga yoki pastga
+        }
+
+        // O'yinchi yutqazsa
+        if (ballX <= 0) {
+            ballDirectionX = 1;
+            messageDisplay.innerText = 'yutqazding';
+            resetGame();
+        }
+
+        // Har bir 10 ball to'plaganda to'p tezligini oshirish
+        if (score >= 10) {
+            ballSpeedX += 1;
+            ballSpeedY += 0.5;
+        }
+    }
+
+    function resetGame() {
+        score = 0;
+        scoreDisplay.innerText = score;
+        ball.style.left = '392px';
+        ball.style.top = '192.5px';
+        ballSpeedX = 5;
+        ballSpeedY = 2;
+        ballDirectionX = 1;
+        ballDirectionY = 1;
+        messageDisplay.innerText = '';
+    }
+
+    function gameLoop() {
+        moveBall();
+        moveOpponent();  // Raqib harakatlanadi
+        requestAnimationFrame(gameLoop);
+    }
+
+    moveOpponent();
+    gameLoop();
+
+    console.log("1" + (1 + 1))
+</script>
+
+</body>
+</html>

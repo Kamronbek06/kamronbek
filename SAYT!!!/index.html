@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamkorlik sayti</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212;
+            color: white;
+            font-family: Arial,sans-serif;
+            text-align: center;
+        }
+        .salom{
+            font-size: 30px;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fedeIn 2s forwards;
+            box-shadow: -10px 0 0  rgba(255, 0, 0, 0.438),10px 0 0 rgba(255, 0, 0, 0.438);
+            border-radius: 10px;
+            
+        }
+        .enter-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: rgba(255, 255, 255, 0.507);
+            border: none;
+            cursor: pointer;
+            opacity: 0.5;
+            transform: translateY(-20px);
+            animation: sayt 2s forwards ;
+        }
+        .enter-button:hover {
+            background-color: #45a049;
+            box-shadow: 0 0 15px rgba(43, 255, 0, 0.438);
+            color: rgb(255, 255, 255);
+        }
+
+        @keyframes fedeIn {
+            from{
+                opacity: 0;
+                transform: translateY(-20px);
+                color: rgba(255, 255, 255, 0.342);
+            }
+            to{
+                opacity: 1;
+                transform: translateY(0);
+                color: white;
+            }
+        }
+        @keyframes sayt {
+            from{
+                opacity: 0;
+                transform: translateY(-20px);
+                color: rgba(255, 255, 255, 0.342);
+            }
+            to{
+                opacity: 1;
+                transform: translateY(0);
+                color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <h1 class="salom">Hamkorlik saytiga xush kelibsiz</h1>
+    <button class="enter-button" onclick="window.location.href='register.html'">saytga kirish</button>
+    </div>
+</body>
+</html>

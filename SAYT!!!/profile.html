@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Sahifasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .profile-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        input {
+            display: block;
+            width: 100%;
+            margin: 10px -10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin: 10px 0px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <h2>Profil</h2>
+        <img id="profileImage" src="default-avatar.png" alt="Profil rasmi">
+        <input type="file" id="uploadImage" accept="image/*">
+        
+        <input type="text" id="companyName" placeholder="Kampaniya nomi">
+        <button onclick="saveProfile()">Saqlash</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let savedName = localStorage.getItem("companyName");
+            let savedImage = localStorage.getItem("profileImage");
+
+            if (savedName) {
+                document.getElementById("companyName").value = savedName;
+            }
+            if (savedImage) {
+                document.getElementById("profileImage").src = savedImage;
+            }
+        });
+
+        document.getElementById("uploadImage").addEventListener("change", function(event) {
+            let reader = new FileReader();
+            reader.onload = function() {
+                let imageUrl = reader.result;
+                document.getElementById("profileImage").src = imageUrl;
+                localStorage.setItem("profileImage", imageUrl);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+
+        function saveProfile() {
+            let companyName = document.getElementById("companyName").value;
+            if (companyName.trim() === "") {
+                alert("Kampaniya nomini kiriting!");
+                return;
+            }
+            localStorage.setItem("companyName", companyName);
+            alert("Profil saqlandi!");
+        }
+    </script>
+
+</body>
+</html>

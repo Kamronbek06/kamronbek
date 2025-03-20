@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap-4.6.2-dist/css/bootstrap.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        #body {
+            background-image: url('../rasm.jpg');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            margin-top: 50PX;
+
+        }
+
+        td {
+
+            border: 5px solid rgb(0, 0, 0);
+            margin-top: 500px;
+            padding: 10px;
+            background-color: aqua;
+            font-size: 15pt;
+        }
+
+        table {
+
+            border-collapse: collapse;
+            margin: 20px auto;
+            margin-top: 100px;
+            color: rgb(0, 0, 0);
+
+        }
+
+        .input-container {
+            border: 4px solid rgb(0, 0, 0);
+            padding: 10px auto;
+            margin: 10px auto;
+            display: inline-block;
+            border-radius: 15px auto;
+            background-color: aqua;
+        }
+
+        input {
+            padding: 5px;
+            border: 1PX solid rgb(0, 0, 0);
+            border-radius: 10PX;
+            width: 200PX;
+            background-color: aqua;
+
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div
+        style="background-color: rgba(89, 83, 83,0.5); width: 15%; padding: 20px; margin-left: 1100px;color: white; font-size: 20pt; border-radius: 40px;">
+        ism:<input class="input-container" id="ism" type="text">
+        <br><br>
+        familya: <input class="input-container" id="fam" type="text">
+        <br><br>
+        tel: <input class="input-container" id="tel" type="number">
+        <br><br>
+        manzil: <input class="input-container" id="manzil" type="text">
+        <br><br>
+        <button onclick="yoz(0)" class="btn btn-primary">create</button>
+        <button onclick="tozalash()" class="btn btn-warning">barchasini tozalash</button>
+    </div>
+
+
+    <table id="tab" style="color: white; background-color: rgba(36, 35, 35, 0.485); width: 600px;"
+        class="table table-hover table-striped table-border">
+
+    </table>
+    <script>
+
+
+        console.log("count: " + localStorage.getItem('count'))
+        if (localStorage.getItem('count') == null) {
+            localStorage.setItem('count', 1)
+        }
+
+
+        let forCount = Number.parseInt(localStorage.getItem('count')) + 1
+
+
+        let tab = document.getElementById('tab')
+        let tbody = document.createElement('tbody')
+
+
+        let thead = document.createElement('thead')
+        let th1 = document.createElement('th')
+        let th2 = document.createElement('th')
+        let th3 = document.createElement('th')
+        let th4 = document.createElement('th')
+        let th5 = document.createElement('th')
+
+
+
+        let th1matn = document.createTextNode('ism')
+        let th2matn = document.createTextNode('familya')
+        let th3matn = document.createTextNode('tel')
+        let th4matn = document.createTextNode('manzil')
+        let th5matn = document.createTextNode('jins')
+
+
+        th1.appendChild(th1matn)
+        th2.appendChild(th2matn)
+        th3.appendChild(th3matn)
+        th4.appendChild(th4matn)
+        th5.appendChild(th5matn)
+
+
+        thead.appendChild(th1)
+        thead.appendChild(th2)
+        thead.appendChild(th3)
+        thead.appendChild(th4)
+        thead.appendChild(th5)
+
+
+        tab.appendChild(thead)
+
+        function tozalash() {
+            localStorage.clear()
+            localStorage.setItem('count', 1)
+
+            let getTbody = tab.childNodes[2]
+            getTbody.innerHTML = ""
+        }
+
+
+
+        function yoz(n) {
+
+            let ism = document.getElementById('ism')
+            let fam = document.getElementById('fam')
+            let tel = document.getElementById('tel')
+            let manzil = document.getElementById('manzil')
+
+
+            if (n > 0 ) {
+                console.log("n: " + n)
+                let lsism = localStorage.getItem("ism" + n)
+                console.log("ism: " + lsism)
+
+                let lsfam = localStorage.getItem("fam" + n)
+                let lstel = localStorage.getItem("tel" + n)
+                let lsmanzil = localStorage.getItem("manzil" + n)
+                ism.value = lsism
+                console.log("ism.value:" + ism.value)
+                fam.value = lsfam
+                tel.value = lstel
+                manzil.value = lsmanzil
+            }
+
+
+            let tr = document.createElement('tr')
+            let td1 = document.createElement('td')
+            let td2 = document.createElement('td')
+            let td3 = document.createElement('td')
+            let td4 = document.createElement('td')
+
+            let td5 = document.createElement('td')
+            let td6 = document.createElement('td')
+            let td7 = document.createElement('td')
+            let td8 = document.createElement('td')
+
+
+
+            firstName = document.createTextNode(ism.value)
+            surName = document.createTextNode(fam.value)
+            phone = document.createTextNode(tel.value)
+
+            let button = document.createElement('button')
+            button.setAttribute("class", "btn btn-danger")
+            button.setAttribute("id", n)
+            let buttonValue = document.createTextNode('o\'chirish')
+            button.appendChild(buttonValue)
+
+
+
+
+            let buttonKorish = document.createElement('a')
+            buttonKorish.setAttribute('href', '2.html?ism=' + ism.value + '&fam=' + fam.value + '&tel=' + tel.value + '&manzil=' + manzil.value)
+            let matnKorish = document.createTextNode('2-sahifa')
+            buttonKorish.setAttribute("class", "btn btn-primary")
+            td7.appendChild(matnKorish)
+            buttonKorish.appendChild(matnKorish)
+
+
+
+            let buttonKurish = document.createElement('a')
+            buttonKurish.setAttribute('href', '3.html?ism=' + ism.value + '&fam=' + fam.value + '&tel=' + tel.value + '&manzil=' + manzil.value+ '&n='+ n)
+            let matnKurish = document.createTextNode('Tahrirlash')
+            buttonKurish.setAttribute("class", "btn btn-primary")
+            td8.appendChild(matnKurish)
+            buttonKurish.appendChild(matnKurish)
+
+
+            if (fam.value.toString().endsWith('a')){
+                td6.textContent = "ayol"
+            }
+            else{
+                td6.textContent = "erkak"
+            }
+
+            td1.textContent = ism.value
+            td2.textContent = fam.value
+            td3.textContent = tel.value
+            td4.textContent = manzil.value
+
+            tr.appendChild(td1)
+            tr.appendChild(td2)
+            tr.appendChild(td3)
+            
+            tr.appendChild(td4)
+            tr.appendChild(td6)
+            td5.appendChild(button)
+            td7.appendChild(buttonKorish)
+            td8.appendChild(buttonKurish)
+            tr.appendChild(td5)
+            tr.appendChild(td7)
+            tr.appendChild(td8)
+            
+            
+
+            tbody.appendChild(tr)
+            tab.appendChild(tbody)
+
+            let tempCount = localStorage.getItem("count")
+            localStorage.setItem("ism" + tempCount, ism.value)
+            localStorage.setItem("fam" + tempCount, fam.value)
+            localStorage.setItem("tel" + tempCount, tel.value)
+            localStorage.setItem("manzil" + tempCount, manzil.value)
+
+            if (n == 0) {
+                let lscount = localStorage.getItem('count')
+                localStorage.setItem('count', Number.parseInt(lscount) + 1)
+                forCount = Number.parseInt(lscount) + 1
+                console.log(forCount)
+            }
+
+            ism.value = ''
+            fam.value = ''
+            tel.value = ''
+            manzil.value = ''
+
+            button.addEventListener('click', e => {
+                localStorage.removeItem("ism" + button.getAttribute('id'))
+                localStorage.removeItem("fam" + button.getAttribute('id'))
+                localStorage.removeItem("tel" + button.getAttribute('id'))
+                localStorage.removeItem("manzil" + button.getAttribute('id'))
+                tr.remove()
+            })
+
+
+
+        }
+
+
+        for (i = 1; i <= forCount - 2; i++) {
+            if(localStorage.getItem("ism" + i) != null){
+                yoz(i)
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

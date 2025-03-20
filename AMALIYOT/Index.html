@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        .box {
+            width: 920px;
+            height: 920px;
+            display: flex;
+        }
+
+        .katak {
+            width: 300px;
+            height: 300px;
+            background-color: gray;
+            margin: 5px;
+            font-size: 150pt;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="miniBox">
+            <div id="1" class="katak" onclick="chizish(this)"></div>
+            <div id="4" class="katak" onclick="chizish(this)"></div>
+            <div id="7" class="katak" onclick="chizish(this)"></div>
+        </div>
+        <div class="miniBox">
+            <div id="2" class="katak" onclick="chizish(this)"></div>
+            <div id="5" class="katak" onclick="chizish(this)"></div>
+            <div id="8" class="katak" onclick="chizish(this)"></div>
+        </div>
+        <div class="miniBox">
+            <div id="3" class="katak" onclick="chizish(this)"></div>
+            <div id="6" class="katak" onclick="chizish(this)"></div>
+            <div id="9" class="katak" onclick="chizish(this)"></div>
+        </div>
+    </div>
+
+    <script>
+        let belgi = "X"
+        function chizish(bosilganDiv) {
+            if (bosilganDiv.innerHTML == '') {
+                bosilganDiv.innerHTML = belgi
+
+                let divlar = []
+                for (i = 1; i <= 9; i++) {
+                    divlar[i] = document.getElementById(i)
+                }
+
+                for (i = 0; i < combinatsiyalar.length; i++) {
+                    yutuqniAniqlash = 0
+                    for (j = 0; j < 3; j++) {
+                        if (divlar[combinatsiyalar[i][j]].innerText == belgi) {
+                            yutuqniAniqlash += 1
+                        }
+                    }
+                    if (yutuqniAniqlash == 3) {
+                        alert(belgi + " siz yutdingiz")
+
+                        for (x = 1; x <= 9; x++) {
+                            divlar[x].innerHTML = ""
+                        }
+                    } 
+                }
+
+                belgi = belgi == "X" ? "O" : "X"
+            }
+        }
+        combinatsiyalar =
+            [
+                [1, 2, 3], [4, 5, 6], [7, 8, 9],
+                [1, 4, 7], [2, 5, 8], [3, 6, 9],
+                [1, 5, 9], [3, 5, 7]
+            ]
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap-4.6.2-dist/css/bootstrap.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Faktura Generator</h2>
+        <label for="clientName">Mijoz ismi:</label><br>
+        <input type="text" id="clientName" placeholder="Mijoz nomini kiriting">
+
+        <table id="invoiceTable">
+            <thead>
+                <tr>
+                    <th>Xizmat</th>
+                    <th>Miqdor</th>
+                    <th>Narx</th>
+                    <th>Jami</th>
+                    <th>O'chirish</th>
+                </tr>
+            </thead>
+            <tbody id="invoiceBody"></tbody>
+        </table>
+
+        <button id="addRow">+ Xizmat qo'shish</button>
+
+        <h3>Umumiy: <span id="totalAmount">0</span> so'm</h3>
+        
+        <button id="downloadPdf">PDF yuklab olish</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ro‘yxatdan o‘tish</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .register-box {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px -15px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.411);
+        }
+
+        .login-btn, .google-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .login-btn:hover {
+            background-color: #45a049;
+            box-shadow: 0 0 10px rgba(81, 255, 0, 0.438);
+        }
+
+        .google-btn {
+            background-color: #db4437;
+            color: white;
+        }
+
+        .google-btn:hover {
+            background-color: #c1351d;
+            box-shadow: 0 0 10px rgba(255, 94, 0, 0.438);
+        }
+
+        .link {
+            margin-top: 15px;
+            display: block;
+            color: #bbb;
+            text-decoration: none;
+        }
+
+        .link:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-box">
+        <h2>Ro‘yxatdan o‘tish</h2>
+        <input type="text" placeholder="Email" id="email">
+        <input type="password" placeholder="Parol" id="password">
+        <button class="login-btn" onclick="register()">Ro‘yxatdan o‘tish</button>
+        <button class="google-btn" onclick="googleLogin()">🔵 Google orqali kirish</button>
+        <a href="login.html" class="link">Allaqachon akkauntingiz bormi? Kirish</a>
+    </div>
+
+    <script>
+        function register() {
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            if(email && password) {
+                alert("Ro‘yxatdan muvaffaqiyatli o‘tdingiz!");
+                window.location.href = "home.html"; // Keyingi sahifaga o'tish
+            } else {
+                alert("Iltimos, barcha maydonlarni to‘ldiring!");
+            }
+        }
+
+        function googleLogin() {
+            alert("Google login hali ulanmagan! (Keyin Firebase bilan ishlash mumkin)");
+        }
+    </script>
+
+</body>
+</html>

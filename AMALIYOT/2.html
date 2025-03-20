@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-4.6.2-dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url('../rasm.jpg');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            margin-top: 400PX;
+        }
+        div{
+            border: 5px solid rgb(0, 0, 0);
+            border-radius: 20px;
+            margin-left: 1000px;
+            margin-top: 500px;
+            width:fit-content;
+            height: fit-content;
+            background-color: aqua;
+            color: brown;
+            padding: 20px;
+        }
+        h1{
+            border-radius: 20px;
+            border: 1px solid rgb(0, 0, 0);
+            color: blue;
+            padding: 20px;
+        }
+        button{
+            background-color: aqua;
+            
+        }
+    </style>
+</head>
+<body>
+        <div>
+    <h1 id="bir"></h1>
+    <h1 id="ikki"></h1>
+    <h1 id="uch"></h1>
+    <h1 id="tort"></h1>
+    
+   <button><a href="1.HTML">bosh sahifaga o'tish</a></button> 
+   <button><a href="3.HTML">tahrirlash</a></button>
+        </div>
+    <script>
+        
+        let params = new URLSearchParams(window.location.search)
+        console.log(params.get('ism'))
+        console.log(params.get('fam'))
+        console.log(params.get('tel'))
+        console.log(params.get('manzil'))
+        
+
+
+
+
+
+        let ismYozuvi = document.getElementById('bir')
+        ismYozuvi.innerHTML = 'ismingiz:'+ params.get('ism')
+
+        
+
+        let famYozuvi = document.getElementById('ikki')
+        famYozuvi.innerHTML = 'familyangiz:'+ params.get('fam')
+
+        let telYozuvi = document.getElementById('uch')
+        telYozuvi.innerHTML = 'raqamingiz:'+ params.get('tel')
+
+        let manzilYozuvi = document.getElementById('tort')
+        manzilYozuvi.innerHTML = 'manzilingiz:'+ params.get('manzil')
+
+        
+
+  
+
+
+
+        
+
+    </script>
+</body>
+</html>

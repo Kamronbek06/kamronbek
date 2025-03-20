@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Hisob-kitob</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hisob-kitob</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Xizmat nomi</th>
+                    <th>Miqdor</th>
+                    <th>Narx</th>
+                    <th>Jami</th>
+                    <th>Oʻchirish</th>
+                </tr>
+            </thead>
+            <tbody id="invoiceBody" style="padding: 0%;"></tbody>
+        </table>
+        <button id="addRow">+ Qo‘shish</button>
+        <h2>Jami: <span id="totalAmount">0</span> so‘m</h2>
+        <button id="downloadPdf">PDF Yuklash</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

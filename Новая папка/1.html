@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        div {
+            background: #ff0000;
+            color: #ff0000;
+            transition: 500ms;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        div:active {
+            min-width: 300px;
+            min-height: 200px;
+            color: aliceblue;
+            background-color: crimson;
+            margin-left: 450px;
+            transform: scale(2);
+            transform: rotate(400deg);
+            border-radius: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="height: 200px; width: 200px;" id="bir">
+
+    </div>
+    <!-- <div style="height: 200px; width: 200px;background-color: blue;" id="ikki" > -->
+
+    <!-- </div> -->
+    <!-- <div style="height: 200px; width: 200px;background-color: chartreuse;" id="uch" > -->
+
+    <!-- </div> -->
+    <!-- <div style="height: 200px; width: 200px;background-color: darkgreen;" id="tort"> -->
+
+    <!-- </div> -->
+    <!-- <div style="height: 200px; width: 200px;background-color: black;" id="besh"> -->
+
+    <!-- </div> -->
+    <br><br>
+
+    <input id="in" type="text">
+    <button onclick="yozuvchi()">ok</button>
+    <script>
+        let mas = ""
+        let div = document.getElementById('bir')
+
+        function yozuvchi() {
+            let input = document.getElementById('in').value
+            document.getElementById('in').value = ""
+            mas += input
+            div.innerHTML = mas
+            d
+        }
+    </script>
+</body>
+
+</html>

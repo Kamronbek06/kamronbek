@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompaniya Sahifasi</title>
+</head>
+<body>
+
+    <h2>Kompaniya Paneli</h2>
+    <p>Hush kelibsiz, <span id="companyName"></span>!</p>
+    <button onclick="logout()">Chiqish</button>
+
+    <script>
+        let params = new URLSearchParams(window.location.search);
+        let company = params.get("user");
+
+        if (!company) {
+            alert("Siz tizimga kirmagansiz!");
+            window.location.href = "login.html";
+        } else {
+            document.getElementById("companyName").innerText = company;
+        }
+
+        function logout() {
+            window.location.href = "login.html";
+        }
+    </script>
+
+</body>
+</html>

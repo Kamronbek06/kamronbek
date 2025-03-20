@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kampaniya Profili</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .header {
+            background-color: #1e1e1e;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .profile {
+            margin: 20px auto;
+            width: 80%;
+            text-align: center;
+        }
+
+        .profile img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            margin: 15px 0;
+            font-size: 16px;
+            color: #ddd;
+        }
+
+        .ads {
+            margin-top: 20px;
+        }
+
+        .ad-item {
+            background-color: #1e1e1e;
+            padding: 10px;
+            margin: 10px auto;
+            border-radius: 5px;
+            width: 80%;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .edit-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .contact-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background-color: #1976D2;
+        }
+
+        .contact-btn:hover {
+            background-color: #388E3C;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header" id="companyName">Kampaniya nomi</div>
+
+    <div class="profile">
+        <img src="https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits" alt="Kampaniya logotipi">
+        <p class="description" id="companyDescription">Bu yerda kampaniya haqida ma’lumot chiqadi.</p>
+    </div>
+
+    <div class="ads">
+        <h3>Reklamalar</h3>
+        <div class="ad-item">📢 Reklama 1</div>
+        <div class="ad-item">📢 Reklama 2</div>
+    </div>
+
+    <div class="buttons">
+        <button class="edit-btn" onclick="editProfile() ,window.location.href='profile.html'">✏️ Profilni tahrirlash</button>
+        <button class="contact-btn" onclick="contactCompany()">📩 Hamkorlik uchun bog‘lanish</button>
+    </div>
+
+    <script>
+        function getCompanyName() {
+            let params = new URLSearchParams(window.location.search);
+            return params.get("name") || "Noma'lum Kampaniya";
+        }
+
+        document.getElementById("companyName").innerText = getCompanyName();
+
+        function editProfile() {
+            alert("Profilni tahrirlash oynasi ochiladi! (Kelajakda modal yoki sahifa)");
+            
+        }
+
+        function contactCompany() {
+            alert("Xabar yuborish oynasi ochiladi! (Kelajakda chat bilan bog‘lash mumkin)");
+        }
+    </script>
+
+</body>
+</html>

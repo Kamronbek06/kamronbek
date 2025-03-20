@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap-4.6.2-dist/css/bootstrap.css">
+    <style>
+        
+    body{
+        background-image: url('../rasm.jpg');
+        background-size: cover;
+        background-position: center;
+        text-align: center;
+        margin-top: 400PX;
+    }
+
+    .bosh{
+        border: 5px solid rgb(0, 0, 0);
+        margin-left: 100px;
+        margin-top: -100px; 
+        background-color: rgb(255, 217, 2);
+        width:fit-content;
+        height: fit-content;
+        padding: 50px;
+        margin: 2%;
+        border-radius: 50px;
+    }
+    
+    b{
+        border-radius: 20px;
+        border: 4px solid rgba(255, 200, 0, 0.885);
+        color: rgb(0, 0, 0);
+        padding: 20px;
+        width:fit-content;
+        height: fit-content;
+        margin-left: -1400px;
+        font-size: 20pt;
+    }
+    button{
+        
+        background-color: rgba(255, 255, 0, 0);
+        border-radius: 15px;
+        font-size: 15pt;
+        margin-left: -2000px;
+        margin-top: -10px;
+        
+        
+        
+        
+    }
+    input{
+        background-color: yellowgreen;
+        border-radius: 20px;
+        font-size: 10pt;
+        width: 500px;
+        height: 100px;
+
+    }
+    .tsahifa{
+        margin-left: 2000px;
+        
+    }
+    input{
+        font-size: 25pt;
+    }
+    </style>
+</head>
+<body>
+
+    
+    
+    
+    
+    <div class="bosh">
+        <div ><button class="tsahifa" onclick="uzgartirish()">uzgarturish</button></div>
+        
+        
+        <div ><button><a href="1.HTML">bosh sahifaga o'tish</a></button> </div>
+        
+    
+        <b  class="birinchi" id="bir"></b><input  type="text" name="" id="in1">
+        <br><br><br><br>
+        <b  class="ikkinchi" id="ikki"></b><input type="text" name="" id="in2">
+        <br><br><br><br>
+        <b  class="uchinchi" id="uch"></b><input type="text" name="" id="in3">
+        <br><br><br><br>
+        <b class="tortinchi" id="tort"></b><input type="text" name="" id="in4">
+        
+    
+    
+        
+        
+
+    </div>
+       
+            
+        <script>
+            
+            let params = new URLSearchParams(window.location.search)
+            console.log(params.get('ism'))
+            console.log(params.get('fam'))
+            console.log(params.get('tel'))
+            console.log(params.get('manzil'))
+    
+    
+    
+    
+    
+            let ismYozuvi = document.getElementById('bir')
+            ismYozuvi.innerHTML = 'ismingiz:' 
+            document.getElementById('in1').value = params.get('ism')
+    
+            
+    
+            let famYozuvi = document.getElementById('ikki')
+            famYozuvi.innerHTML = 'familyangiz:'
+            document.getElementById ('in2').value = params.get('fam')
+    
+            let telYozuvi = document.getElementById('uch')
+            telYozuvi.innerHTML = 'raqamingiz:'
+            document.getElementById('in3').value = params.get('tel')
+    
+            let manzilYozuvi = document.getElementById('tort')
+            manzilYozuvi.innerHTML = 'manzilingiz:' 
+            document.getElementById('in4').value = params.get('manzil')
+      
+    
+    
+            function uzgartirish(){
+                let n = params.get('n')
+                localStorage.setItem('ism' + n,document.getElementById('in1').value)
+                localStorage.setItem('fam' + n,document.getElementById('in2').value)
+                localStorage.setItem('tel' + n,document.getElementById('in3').value)
+                localStorage.setItem('manzil' + n,document.getElementById('in4').value)
+                window.location.href="1.html"
+
+            }
+    
+        </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asosiy sahifa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #1e1e1e;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .search-box {
+            margin: 20px auto;
+            width: 80%;
+            text-align: center;
+        }
+
+        .search-box input {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .company-list {
+            width: 80%;
+            margin: auto;
+        }
+
+        .company-card {
+            background-color: #1e1e1e;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .company-card img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            
+        }
+
+        .company-card img:hover {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            
+        }
+
+        .company-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .company-name:hover {
+            font-size: 28px;
+            font-weight: bold;
+            transition: 0.5s;
+            box-shadow: 0 0 15px rgba(255, 61, 61, 0.329);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #1e1e1e;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .footer button:hover {
+            background-color: #45a049;
+        }
+
+        button{
+            background-color: green;
+        }
+        button:hover{
+            box-shadow: 0 0 15px rgba(43, 255, 0, 0.438);
+        }
+
+        
+        input:hover{
+            box-shadow: 0 0 15px rgba(255, 217, 0);
+        }
+        placeholder {
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">Kampaniyalar paneli</div>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Kampaniya nomini qidiring..." onkeyup="searchCompanies()">
+    </div>
+
+    <div class="company-list" id="companyList">
+        <div class="company-card" onclick="openCompany('Kompaniya A')">
+            <img src="https://via.placeholder.com/50" alt="Logo">
+            <div class="company-name">Kompaniya A</div>
+        </div>
+        <div class="company-card" onclick="openCompany('Kompaniya B')">
+            <img src="https://via.placeholder.com/50" alt="Logo">
+            <div class="company-name">Kompaniya B</div>
+        </div>
+        <div class="company-card" onclick="openCompany('Kompaniya C')">
+            <img src="https://via.placeholder.com/50" alt="Logo">
+            <div class="company-name">Kompaniya C</div>
+        </div>
+        <div class="company-card" onclick="openCompany('Kompaniya D')">
+            <img src="https://via.placeholder.com/50" alt="Logo">
+            <div class="company-name">Kompaniya D</div>
+        </div>
+        <div class="company-card" onclick="openCompany('Kompaniya E')">
+            <img src="https://via.placeholder.com/50" alt="Logo">
+            <div class="company-name">Kompaniya E</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <button onclick="window.location.href='chat.html'">💬 Chat bo‘limi</button>
+    </div>
+
+    <script>
+        function searchCompanies() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let companies = document.getElementsByClassName("company-card");
+
+            for (let i = 0; i < companies.length; i++) {
+                let name = companies[i].getElementsByClassName("company-name")[0].innerText.toLowerCase();
+                if (name.includes(input)) {
+                    companies[i].style.display = "flex";
+                } else {
+                    companies[i].style.display = "none";
+                }
+            }
+        }
+
+        function openCompany(companyName) {
+            alert(companyName + " sahifasiga o'tyapsiz...");
+            window.location.href = "company.html?name=" + encodeURIComponent(companyName);
+        }
+    </script>
+
+</body>
+</html>

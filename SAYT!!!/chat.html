@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #121212; 
+            color: white; 
+            margin: 0; 
+            padding: 0; 
+        }
+        .header { 
+            background-color: #1e1e1e; 
+            padding: 15px; 
+            text-align: center; 
+            font-size: 24px; 
+            font-weight: bold; 
+        }
+        .chat-container { 
+            width: 80%; 
+            margin: auto; 
+            margin-top: 20px; 
+            height: 400px; 
+            background-color: #1e1e1e; 
+            border-radius: 5px; 
+            padding: 10px; 
+            overflow-y: scroll; 
+        }
+        .message { 
+            padding: 10px; 
+            border-radius: 5px; 
+            margin: 5px; 
+            max-width: 70%; 
+            word-wrap: break-word; 
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        .message-text {
+            flex-grow: 1;
+        }
+        .sent { 
+            background-color: #2196F3; 
+            margin-left: auto; 
+            color: white; 
+        }
+        .received { 
+            background-color: #4CAF50; 
+            color: white; 
+        }
+        .input-container { 
+            width: 80%; 
+            margin: auto; 
+            display: flex; 
+            margin-top: 10px; 
+        }
+        .input-container input { 
+            flex: 1; 
+            padding: 10px; 
+            font-size: 16px; 
+            border: none; 
+            border-radius: 5px; 
+        }
+        .input-container button { 
+            padding: 10px; 
+            font-size: 16px; 
+            background-color: #4CAF50; 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+            border-radius: 5px; 
+            margin-left: 5px; 
+        }
+        
+        /* Yangilangan stillar */
+        .message-controls {
+            display: flex;
+            gap: 5px;
+        }
+        .edit-btn, .delete-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .edit-btn {
+            background-color: #FFA500;
+            color: white;
+        }
+        .delete-btn {
+            background-color: #FF4444;
+            color: white;
+        }
+        .edit-btn:hover, .delete-btn:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+        .editing {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">📩 Kampaniya Chat</div>
+    <div class="chat-container" id="chatBox"></div>
+
+    <div class="input-container">
+        <input class="xabar" type="text" id="messageInput" placeholder="Xabar yozing...">
+        <button onclick="sendMessage()">Yuborish</button>
+    </div>
+
+    <script>
+        let chatBox = document.getElementById("chatBox");
+        let currentCompany = localStorage.getItem("currentCompany") || "Guest";
+        let editingMessageId = null;
+
+        function generateMessageId() {
+            return 'msg_' + Date.now();
+        }
+    
+        function sendMessage() {
+            let messageInput = document.getElementById("messageInput");
+            let message = messageInput.value;
+            if (message.trim() === "") return;
+            
+            if (editingMessageId) {
+                updateMessage(editingMessageId, message);
+                editingMessageId = null;
+                messageInput.value = "";
+                return;
+            }
+
+            createMessage(message);
+            messageInput.value = "";
+        }
+
+        function createMessage(text) {
+            let messageId = generateMessageId();
+            let newMessage = document.createElement("div");
+            newMessage.className = "message sent";
+            newMessage.id = messageId;
+            
+            newMessage.innerHTML = `
+                <div class="message-text">${text}</div>
+                <div class="message-controls">
+                    <button class="edit-btn" onclick="editMessage('${messageId}')">Tahrirlash</button>
+                    <button class="delete-btn" onclick="deleteMessage('${messageId}')">O'chirish</button>
+                </div>
+            `;
+            
+            chatBox.appendChild(newMessage);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function deleteMessage(messageId) {
+            if (confirm("Xabarni o'chirishni xohlaysizmi?")) {
+                let message = document.getElementById(messageId);
+                if (message) {
+                    message.remove();
+                }
+            }
+        }
+
+        function editMessage(messageId) {
+            let message = document.getElementById(messageId);
+            if (!message) return;
+
+            let messageText = message.querySelector('.message-text').textContent;
+            let messageInput = document.getElementById("messageInput");
+            messageInput.value = messageText;
+            messageInput.focus();
+            
+            editingMessageId = messageId;
+            message.classList.add('editing');
+        }
+
+        function updateMessage(messageId, newText) {
+            let message = document.getElementById(messageId);
+            if (!message) return;
+
+            message.innerHTML = `
+                <div class="message-text">${newText}</div>
+                <div class="message-controls">
+                    <button class="edit-btn" onclick="editMessage('${messageId}')">Tahrirlash</button>
+                    <button class="delete-btn" onclick="deleteMessage('${messageId}')">O'chirish</button>
+                </div>
+            `;
+            
+            message.classList.remove('editing');
+        }
+
+        // Enter tugmasini bosish orqali xabar yuborish
+        document.getElementById("messageInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+
+</body>
+</html>
